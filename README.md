@@ -1,33 +1,14 @@
-# node-js-sample
+# Onion or Not?
 
-This is a barebones Node.js app using the [Express](http://expressjs.com/) framework.
+Onion or Not? is a fun game that challenges you to decide whether a ridiculous headline is from the Onion or not. Once you've made your choice, click the corresponding button and you can find out if you're right or wrong. Onion headlines are sourced from the [Onion Daily news](http://theonion.com), and the real "news" headlines are obtained from submissions to ["Not the Onion" on Reddit](http://reddit.com/r/nottheonion).
 
-## Running Locally
+This app is made with [Bootstrap](http://getbootstrap.com), and is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US).
 
-Asumming you have [Node.js](http://nodejs.org/) and [Heroku Toolbelt](https://toolbelt.heroku.com/) installed on your machine:
+## Installation
+To run locally, do the following in a bash terminal. 
 
-```sh
-git clone git@github.com:heroku/node-js-sample.git # or clone your own fork
-cd node-js-sample
-npm install
-foreman start
-```
+	$ git clone https://github.com/nmoroze/onion-or-not.git
+	$ cd onion-or-not
+	$ python -m SimpleHTTPServer
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```
-heroku create
-git push heroku master
-heroku open
-```
-
-## Documentation
-
-For more information about using Node.js on Heroku, see these Dev Center articles:
-
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Building a Real-time, Polyglot Application with Node.js, Ruby, MongoDB and Socket.IO](https://devcenter.heroku.com/articles/realtime-polyglot-app-node-ruby-mongodb-socketio)
-- [Using Socket.IO with Node.js on Heroku](https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku)
+The site will be running [locally on port 8000](http://localhost:8000). 
