@@ -6,6 +6,48 @@
     <link type="text/css" rel="stylesheet" 
           href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
     <style type="text/css">
+        /* Sticky footer styles
+      	-------------------------------------------------- */
+		html,
+		body {
+		height: 100%;
+		/* The html and body elements cannot have any padding or margin. */
+		}
+
+		/* Wrapper for page content to push down footer */
+		#wrap {
+		min-height: 100%;
+		height: auto !important;
+		height: 100%;
+		/* Negative indent footer by it's height */
+		margin: 0 auto -40px;
+		}
+
+		/* Set the fixed height of the footer here */
+		#push,
+		#footer {
+		height: 40px;
+		}
+		#footer {
+		background-color: #f5f5f5;
+		}
+
+		/* Lastly, apply responsive CSS fixes as necessary */
+		@media (max-width: 767px) {
+	        #footer {
+	          margin-left: -20px;
+	          margin-right: -20px;
+	          padding-left: 20px;
+	          padding-right: 20px;
+	        }
+	    }
+	    .img-button {
+	    	cursor: pointer;
+	    }
+	    .img-button:hover {
+	    	opacity:0.4;
+			filter:alpha(opacity=40); /* For IE8 and earlier */
+	    }
     	.hidden {
     		visibility: hidden;
     	}
@@ -14,29 +56,37 @@
 <body>
     <script src="http://code.jquery.com/jquery-1.6.4.js"></script>  
     <script src="quiz.js"></script>
-
-	<div id="headline">
+    <div id="wrap" class="container">
+		<div id="headline">
+			<center>
+				<h1 id="headline-text">Hi!</h1>
+			</center>
+		</div>
 		<center>
-			<h1 id="headline-text">Hi!</h1>
+			<img id="onion" src="http://i.imgur.com/q1XUf0r.png" class="img-circle img-button">
+			</img>
+			<img id="not" src="http://i.imgur.com/RR5JMKT.png" class="img-circle img-button">
+			</img>
 		</center>
-	</div>
-	<center>
-		<button id="onion" type="button" class="btn">
-		Onion!
-		</button>
-		<button id="not" type="button" class="btn">
-		Not!
-		</button>
-	</center>
-	<div id="answer" class="hidden">
-		<center>
-			<div id="answer-text">
-			</div>
-			<button id="continue" type="button" class="btn">
-			Go on
-			</button>
-		</center>
-	</div>
-
+		<div id="answer" class="hidden">
+			<center>
+				<div id="answer-text">
+				</div>
+				<button id="continue" type="button" class="btn">
+				Go on
+				</button>
+			</center>
+		</div>
+		<div id="push"></div>
+    </div>
+    <div id="footer">
+	    <div class="container">
+	    <p>
+	    	<center>
+	        	<a href="#">About</a>
+	        </center>
+	    </p>
+        </div>
+    </div>
 </body>
 </html>
