@@ -12,12 +12,13 @@
     </style>
 </head>
 <body>
-    <script src="http://code.jquery.com/jquery.js"></script>  
+    <script src="http://code.jquery.com/jquery-1.6.4.js"></script>  
+    <script src="https://rawgithub.com/jfhovinne/jFeed/master/build/dist/jquery.jfeed.pack.js"></script>
     <script src="quiz.js"></script>
 
 	<div id="headline">
 		<center>
-			<h1>Hi!</h1>
+			<h1 id="headline-text">Hi!</h1>
 		</center>
 	</div>
 	<center>
@@ -28,11 +29,15 @@
 		Not!
 		</button>
 	</center>
-
 	<div id="answer" class="hidden">
 		<center>
-			Wrong!
+			<div id="answer-text">
+			</div>
+			<button id="continue" type="button" class="btn">
+			Go on
+			</button>
 		</center>
 	</div>
+
 </body>
 </html>
