@@ -5,10 +5,16 @@
 	<title>Onion or Not?</title>
     <link type="text/css" rel="stylesheet" 
           href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
+    <style type="text/css">
+    	.hidden {
+    		visibility: hidden;
+    	}
+    </style>
 </head>
 <body>
     <script src="http://code.jquery.com/jquery.js"></script>  
     <script src="quiz.js"></script>
+
 	<div id="headline">
 		<center>
 			<h1>Hi!</h1>
@@ -22,5 +28,11 @@
 		Not!
 		</button>
 	</center>
+
+	<div id="answer" class="hidden">
+		<center>
+			Wrong!
+		</center>
+	</div>
 </body>
 </html>

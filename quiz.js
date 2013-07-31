@@ -1,22 +1,25 @@
 var onion=true; 
 $( document ).ready(function() {
-	alert("hi!"); 
 	$( "#onion" ).click(function(event){
 		//onion clicked
 		if(onion) {
-			//correct
+			$(" #answer ").html("Correct!");
 		}
 		else {
-			//wrong
+			$(" #answer ").html("Wrong!");
 		}
+		$(" #answer ").removeClass(".hidden");
 	});
 	$( "#not" ).click(function(event){
 		//not clicked
 		if(!onion) {
-			//correct
+			$(" #answer ").html("Correct!");
 		}
 		else {
-			//wrong
+			$(" #answer ").html("Wrong!");
+
 		}
+		$(" #answer ").removeClass("hidden");
+
 	});
 });
