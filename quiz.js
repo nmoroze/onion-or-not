@@ -1,6 +1,7 @@
 $( document ).ready(function() {
 	var oIterator = 0;
 	var nIterator = 0;
+	var onion;
 	loadHeadline();
 	$( "#onion" ).click(function(event){
 		//onion clicked
@@ -27,15 +28,38 @@ $( document ).ready(function() {
 		$(" #answer ").addClass("hidden");
 		loadHeadline();
 	});
+
+	function loadHeadline() {
+		onion = (Math.floor(Math.random()*2)==1);
+		if(onion){
+			parseRSS("http://feeds.theonion.com/theonion/daily", function(data){
+				var entries = data.entries;
+				title = entries[oIterator].title;
+				oIterator++;
+				$("#headline-text").html(title);
+			});
+		}
+		else {
+			parseRSS("http://www.reddit.com/r/nottheonion/.rss", function(data){
+				var entries = data.entries;
+				title = entries[nIterator].title;
+				nIterator++;
+				$("#headline-text").html(title);
+			});
+		}
+	}
+
 });
 
-function loadHeadline() {
-	$.getFeed({
-	   url: 'http://reddit.com/r/nottheonion/.rss',
-	   success: function(feed) {
-	     alert(feed.title);
-	   }
-	 });
-}
 
+
+function parseRSS(url, callback) {
+  $.ajax({
+    url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
+    dataType: 'json',
+    success: function(data) {
+      callback(data.responseData.feed);
+    }
+  });
+}
 
