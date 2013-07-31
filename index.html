@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Onion or Not?</title>
+    <link type="text/css" rel="stylesheet" 
+          href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
+</head>
+<body>
+    <script src="http://code.jquery.com/jquery.js"></script>  
+    <script>
+    	$( document ).ready(function() {
+			alert("hi!"); 
+			$( "#onion" ).click(function(event){
+				alert("onion!");
+			});
+			$( "#not" ).click(function(event){
+				alert("not!");
+			});
+		});
+    </script>
+	<div id="headline">
+		<center>
+			<h1>Hi!</h1>
+		</center>
+	</div>
+	<center>
+		<button id="onion" type="button" class="btn">
+		Onion!
+		</button>
+		<button id="not" type="button" class="btn">
+		Not!
+		</button>
+	</center>
+</body>
+</html>
