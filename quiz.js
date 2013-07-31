@@ -32,7 +32,7 @@ $( document ).ready(function() {
 function loadHeadline() {
 	$.getFeed({
 	   //url: 'http://reddit.com/r/nottheonion/.rss',
-	   url: 'http://feeds.theonion.com/theonion/daily',
+	   url: 'feeds.theonion.com/theonion/daily',
 	   success: function(feed) {
 	     alert(feed.title);
 	   }
