@@ -5,6 +5,7 @@
 	<title>Onion or Not?</title>
     <link type="text/css" rel="stylesheet" 
           href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
+         
     <style type="text/css">
         /* Sticky footer styles
       	-------------------------------------------------- */
@@ -54,8 +55,10 @@
     </style>
 </head>
 <body>
-    <script src="http://code.jquery.com/jquery-1.6.4.js"></script>  
-    <script src="quiz.js"></script>
+    <script src="http://code.jquery.com/jquery.js"></script>  
+	<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>    
+	<script src="quiz.js"></script>
+ 
     <div id="wrap" class="container">
 		<div id="headline">
 			<center>
@@ -83,10 +86,28 @@
 	    <div class="container">
 	    <p>
 	    	<center>
-	        	<a href="#">About</a>
+	        	<a data-toggle="modal" href="#about">About</a>
 	        </center>
 	    </p>
         </div>
     </div>
+    <!--About Modal-->
+    <div id="about" class="modal fade in" >  
+    	<div class="modal-dialog">
+    	<div class="modal-content">
+			<div class="modal-header">  
+				<a class="close" data-dismiss="modal">x</a>  
+				<h3>About</h3>  
+			</div>  
+			<div class="modal-body">  
+				<p>Onion or Not? is a really cool game. Show it to people!</p>                
+			</div>  
+			<div class="modal-footer">  
+				<button href="#" class="btn" data-dismiss="modal">Close</button>  
+			</div>
+		</div>
+		</div>
+	</div>  
+
 </body>
 </html>
