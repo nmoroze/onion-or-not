@@ -31,8 +31,7 @@ $( document ).ready(function() {
 
 function loadHeadline() {
 	$.getFeed({
-	   //url: 'http://reddit.com/r/nottheonion/.rss',
-	   url: 'feeds.theonion.com/theonion/daily',
+	   url: 'http://reddit.com/r/nottheonion/.rss',
 	   success: function(feed) {
 	     alert(feed.title);
 	   }
