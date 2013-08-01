@@ -1,4 +1,8 @@
 $( document ).ready(function() {
+	if(!localStorage.getItem('visited')) {
+		$("#about").modal("show");
+		localStorage.setItem('visited', "true");
+	}
 	var oIterator = 0;
 	var nIterator = 0;
 	var onion;
