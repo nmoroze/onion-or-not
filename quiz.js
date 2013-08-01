@@ -13,7 +13,7 @@ $( document ).ready(function() {
 		}
 		$(" #answer ").removeClass("hidden");
 	});
-	$( "#not" ).click(function(event){
+	$("#not").click(function(event){
 		//not clicked
 		if(!onion) {
 			$("#answer-text").html("Correct!");
@@ -23,6 +23,11 @@ $( document ).ready(function() {
 
 		}
 		$(" #answer ").removeClass("hidden");
+	});
+	$("#startover").click(function(event){
+		oIterator=0;
+		nIterator=0;
+		loadHeadline();
 	});
 	$(" #continue ").click(function(event){
 		$(" #answer ").addClass("hidden");
@@ -34,17 +39,27 @@ $( document ).ready(function() {
 		if(onion){
 			parseRSS("http://feeds.theonion.com/theonion/daily", function(data){
 				var entries = data.entries;
-				title = entries[oIterator].title;
-				oIterator++;
-				$("#headline-text").html(title);
+				if(entries[oIterator]) {
+					title = entries[oIterator].title;
+					oIterator++;
+					$("#headline-text").html(title);
+				}
+				else {
+					$("#alldone").modal("show");
+				}
 			});
 		}
 		else {
 			parseRSS("http://www.reddit.com/r/nottheonion/.rss", function(data){
 				var entries = data.entries;
-				title = entries[nIterator].title;
-				nIterator++;
-				$("#headline-text").html(title);
+				if(entries[nIterator]) {
+					title = entries[nIterator].title;
+					nIterator++;
+					$("#headline-text").html(title);
+				}
+				else {
+					$("#alldone").modal("show");
+				}
 			});
 		}
 	}
