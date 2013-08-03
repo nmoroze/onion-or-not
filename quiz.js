@@ -3,74 +3,55 @@ $( document ).ready(function() {
 		$("#about").modal("show");
 		localStorage.setItem('visited', "true");
 	}
-	var oIterator = 0;
-	var nIterator = 0;
-	var onion;
-	loadHeadline();
-	$( "#onion" ).click(function(event){
-		//onion clicked
-		if(onion) {
-			$("#answer-text").html("Correct!");
-		}
-		else {
-			$("#answer-text").html("Wrong!");
-		}
-		$(" #answer ").removeClass("hidden");
-	});
-	$("#not").click(function(event){
-		//not clicked
-		if(!onion) {
-			$("#answer-text").html("Correct!");
-		}
-		else {
-			$("#answer-text").html("Wrong!");
 
+	parseRSS("http://feeds.theonion.com/theonion/daily", function(data){
+		for(var i=0; i<data.entries.length; i++) {
+			data.entries[i].src="onion"
 		}
-		$(" #answer ").removeClass("hidden");
+		var onionEntries = data.entries;
+		parseRSS("http://www.reddit.com/r/nottheonion/.rss", function(data){
+			for(var i=0; i<data.entries.length; i++) {
+				data.entries[i].src="reddit"
+			}
+			var notEntries = data.entries;
+			var allEntries = onionEntries.concat(notEntries);	
+			allEntries = shuffle(allEntries);
+			console.log(allEntries);
+			nextHeadline(allEntries, 0);		
+		});
 	});
-	$("#startover").click(function(event){
-		oIterator=0;
-		nIterator=0;
-		loadHeadline();
-	});
-	$(" #continue ").click(function(event){
-		$(" #answer ").addClass("hidden");
-		loadHeadline();
-	});
-
-	function loadHeadline() {
-		onion = (Math.floor(Math.random()*2)==1);
-		if(onion){
-			parseRSS("http://feeds.theonion.com/theonion/daily", function(data){
-				var entries = data.entries;
-				if(entries[oIterator]) {
-					title = entries[oIterator].title;
-					oIterator++;
-					$("#headline-text").html(title);
-				}
-				else {
-					$("#alldone").modal("show");
-				}
-			});
-		}
-		else {
-			parseRSS("http://www.reddit.com/r/nottheonion/.rss", function(data){
-				var entries = data.entries;
-				if(entries[nIterator]) {
-					title = entries[nIterator].title;
-					nIterator++;
-					$("#headline-text").html(title);
-				}
-				else {
-					$("#alldone").modal("show");
-				}
-			});
-		}
-	}
-
 });
 
+function nextHeadline(headlines, question) {
+	if(question<headlines.length) {
+		$("#headline-text").html(headlines[question].title);
+		$("#onion").click(function(){
+			buttonClicked("onion", headlines, question);
+		});
+		$("#not").click(function(){
+			buttonClicked("reddit", headlines, question);
+		});
+	}
+	else {
+		$("#alldone").modal("show");
+		$("#startover").click(function(){
+			nextHeadline(headlines, 0);
+		});
+	}
+}
 
+function buttonClicked(ans, headlines, question) {
+	console.log("button");
+	if(ans==headlines[question].src) {
+		$("#answer-text").html("Correct!");
+	}
+	else {
+		$("#answer-text").html("Nope!");
+	}
+	$("#link-text").html("<a href='"+headlines[question].link+"'>Link</a>.");
+	$("#answer").removeClass("hidden");
+	nextHeadline(headlines, question+1);
+}
 
 function parseRSS(url, callback) {
   $.ajax({
@@ -82,3 +63,25 @@ function parseRSS(url, callback) {
   });
 }
 
+//http://stackoverflow.com/questions/2450954/how-to-randomize-a-javascript-array
+function shuffle(array) {
+  var currentIndex = array.length
+    , temporaryValue
+    , randomIndex
+    ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
