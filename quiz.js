@@ -43,14 +43,22 @@ function nextHeadline(headlines, question) {
 function buttonClicked(ans, headlines, question) {
 	console.log("button");
 	if(ans==headlines[question].src) {
-		$("#answer-text").html("Correct!");
+		$("#answer-text").html("Correct! Click either button to move on.");
 	}
 	else {
-		$("#answer-text").html("Nope!");
+		$("#answer-text").html("Nope! Click either button to move on.");
 	}
-	$("#link-text").html("<a href='"+headlines[question].link+"'>Link</a>.");
+	$("#link-text").html("<a href='"+headlines[question].link+"'>Link to article</a>.");
 	$("#answer").removeClass("hidden");
-	nextHeadline(headlines, question+1);
+
+	$("#onion").click(function(){
+		$("#answer").addClass("hidden");
+		nextHeadline(headlines, question+1);
+	});
+	$("#not").click(function(){
+		$("#answer").addClass("hidden");
+		nextHeadline(headlines, question+1);
+	});
 }
 
 function parseRSS(url, callback) {
