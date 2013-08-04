@@ -17,49 +17,110 @@ $( document ).ready(function() {
 			var allEntries = onionEntries.concat(notEntries);	
 			allEntries = shuffle(allEntries);
 			console.log(allEntries);
-			nextHeadline(allEntries, 0);		
+
+			headline.init(allEntries);
+			buttons.init();
+			headline.show();
 		});
 	});
 });
 
-function nextHeadline(headlines, question) {
-	if(question<headlines.length) {
-		$("#headline-text").html(headlines[question].title);
-		$("#onion").click(function(){
-			buttonClicked("onion", headlines, question);
-		});
-		$("#not").click(function(){
-			buttonClicked("reddit", headlines, question);
-		});
+var answerDisplay = function() {
+	var show = function(isCorrect, link) {
+		if(isCorrect) {
+			$("#answer-text").html("Correct! Click either button to go on.");
+		}
+		else {
+			$("#answer-text").html("Wrong! Click either button to go on.");
+		}
+		$("#link-text").html("<a href='"+link+"'>Link to article</a>.");
+		$("#answer").removeClass("hidden");
 	}
-	else {
-		$("#alldone").modal("show");
-		$("#startover").click(function(){
-			nextHeadline(headlines, 0);
-		});
-	}
-}
 
-function buttonClicked(ans, headlines, question) {
-	console.log("button");
-	if(ans==headlines[question].src) {
-		$("#answer-text").html("Correct! Click either button to move on.");
+	var hide = function() {
+		$("#answer").addClass("hidden");
 	}
-	else {
-		$("#answer-text").html("Nope! Click either button to move on.");
-	}
-	$("#link-text").html("<a href='"+headlines[question].link+"'>Link to article</a>.");
-	$("#answer").removeClass("hidden");
 
-	$("#onion").click(function(){
-		$("#answer").addClass("hidden");
-		nextHeadline(headlines, question+1);
-	});
-	$("#not").click(function(){
-		$("#answer").addClass("hidden");
-		nextHeadline(headlines, question+1);
-	});
-}
+	return {
+		show: show,
+		hide: hide
+	}
+} ();
+
+var buttons = function() {
+	var setAnswer = function() {
+		$("#onion").unbind("click").click(function() {
+			console.log("clicked");
+			answerDisplay.show(headline.verify("onion"),headline.getLink());
+
+			setContinue();
+		});
+		$("#not").unbind("click").click(function() {
+			console.log("clicked");
+			answerDisplay.show(headline.verify("reddit"),headline.getLink());
+			setContinue();
+		});
+	}
+
+	var setContinue = function() {
+		console.log("setContinue");
+		$("#onion, #not").unbind("click").click(function() {
+			console.log("clicked");
+			answerDisplay.hide();
+			headline.next();
+			setAnswer();
+		});
+	}
+
+	return {
+		init: setAnswer
+	}
+} ();
+
+var headline = function() {
+	var current = 0,
+	data = [];
+
+	var init = function(headlines) {
+		data=headlines;
+	}
+
+	var show = function() {
+		console.log("show");
+		$("#headline-text").html(data[current].title);
+	}
+
+	var next = function() {
+		console.log("next");
+		current++;
+		if(current<data.length) {
+			show();
+		}
+		else {
+			$("#alldone").modal("show");
+			$("#startover").click(function() {
+				current=0;
+				show();
+			});
+		}
+	}
+
+	var getLink = function() {
+		return data[current].link;
+	}
+
+	var verifyAnswer = function(answer) {
+		return (data[current].src==answer);
+	}
+
+	return {
+		init: init,
+		show: show,
+		next: next,
+		getLink: getLink,
+		verify: verifyAnswer
+	}
+} ();
 
 function parseRSS(url, callback) {
   $.ajax({
