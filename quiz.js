@@ -34,11 +34,11 @@ var answerDisplay = {
 			$("#answer-text").html("Wrong! Click either button to go on.");
 		}
 		$("#link-text").html("<a href='"+link+"'>Link to article</a>.");
-		$("#answer").show();
+		$("#answer").removeClass("hidden");
 	},
 
 	hide: function() {
-		$("#answer").hide();
+		$("#answer").addClass("hidden");
 	}
 };
 
