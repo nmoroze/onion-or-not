@@ -25,8 +25,8 @@ $( document ).ready(function() {
 	});
 });
 
-var answerDisplay = function() {
-	var show = function(isCorrect, link) {
+var answerDisplay = {
+	show: function(isCorrect, link) {
 		if(isCorrect) {
 			$("#answer-text").html("Correct! Click either button to go on.");
 		}
@@ -34,18 +34,13 @@ var answerDisplay = function() {
 			$("#answer-text").html("Wrong! Click either button to go on.");
 		}
 		$("#link-text").html("<a href='"+link+"'>Link to article</a>.");
-		$("#answer").removeClass("hidden");
-	}
+		$("#answer").show();
+	},
 
-	var hide = function() {
-		$("#answer").addClass("hidden");
+	hide: function() {
+		$("#answer").hide();
 	}
-
-	return {
-		show: show,
-		hide: hide
-	}
-} ();
+};
 
 var buttons = function() {
 	var setAnswer = function() {
