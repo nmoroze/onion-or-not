@@ -82,7 +82,7 @@ var headline = function() {
 
 	var show = function() {
 		console.log("show");
-		$("#headline-text").html(data[current].title);
+		$("#headline-text").html(toTitleCase(data[current].title));
 	}
 
 	var next = function() {
@@ -106,6 +106,11 @@ var headline = function() {
 
 	var verifyAnswer = function(answer) {
 		return (data[current].src==answer);
+	}
+
+	//http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript/196991#196991
+	var toTitleCase = function(str) {
+    	return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 	}
 
 	return {
